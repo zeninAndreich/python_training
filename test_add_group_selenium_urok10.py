@@ -2,6 +2,7 @@
 
 from selenium import webdriver
 from selenium.webdriver.common.by import By
+from group import Group
 
 
 class TestTest445588():
@@ -17,7 +18,7 @@ class TestTest445588():
         self.driver.set_window_size(1550, 838)
         self.login(username="admin", password="secret")
         self.init_group_page()
-        self.create_group(name="Тестовая группа из среды разработки по уроку 14 -передача параметров", header="Тест 1", footer="Тест 1 дубль 1")
+        self.create_group(Group(name="Тест по уроку 14 - вынос переменных в класс", header = "test_one", footer="test_two"))
         self.return_to_group_page()
         self.logout()
 
@@ -26,7 +27,7 @@ class TestTest445588():
         self.driver.set_window_size(1550, 838)
         self.login(username="admin", password="secret")
         self.init_group_page()
-        self.create_group(name="", header="", footer="")
+        self.create_group(Group(name="", header="", footer=""))
         self.return_to_group_page()
         self.logout()
 
@@ -36,14 +37,14 @@ class TestTest445588():
     def return_to_group_page(self):
         self.driver.find_element(By.LINK_TEXT, "group page").click()
 
-    def create_group(self, name, header, footer):
+    def create_group(self, group):
         # fill group form
         self.driver.find_element(By.NAME, "group_name").click()
-        self.driver.find_element(By.NAME, "group_name").send_keys(name)
+        self.driver.find_element(By.NAME, "group_name").send_keys(group.name)
         self.driver.find_element(By.NAME, "group_header").click()
-        self.driver.find_element(By.NAME, "group_header").send_keys(header)
+        self.driver.find_element(By.NAME, "group_header").send_keys(group.header)
         self.driver.find_element(By.NAME, "group_footer").click()
-        self.driver.find_element(By.NAME, "group_footer").send_keys(footer)
+        self.driver.find_element(By.NAME, "group_footer").send_keys(group.footer)
         # submit group creation
         self.driver.find_element(By.NAME, "submit").click()
 
