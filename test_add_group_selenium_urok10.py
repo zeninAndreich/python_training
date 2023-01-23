@@ -12,12 +12,21 @@ class TestTest445588():
     def teardown_method(self, method):
         self.driver.quit()
 
-    def test_test445588(self):
+    def test_add_groups_new(self):
         self.open_home_page()
         self.driver.set_window_size(1550, 838)
-        self.login()
+        self.login(username="admin", password="secret")
         self.init_group_page()
-        self.create_group()
+        self.create_group(name="Тестовая группа из среды разработки по уроку 14 -передача параметров", header="Тест 1", footer="Тест 1 дубль 1")
+        self.return_to_group_page()
+        self.logout()
+
+    def test_add_groups_new_pustaya(self):
+        self.open_home_page()
+        self.driver.set_window_size(1550, 838)
+        self.login(username="admin", password="secret")
+        self.init_group_page()
+        self.create_group(name="", header="", footer="")
         self.return_to_group_page()
         self.logout()
 
@@ -27,25 +36,25 @@ class TestTest445588():
     def return_to_group_page(self):
         self.driver.find_element(By.LINK_TEXT, "group page").click()
 
-    def create_group(self):
+    def create_group(self, name, header, footer):
         # fill group form
         self.driver.find_element(By.NAME, "group_name").click()
-        self.driver.find_element(By.NAME, "group_name").send_keys("vvvvvvvvvvvvv")
+        self.driver.find_element(By.NAME, "group_name").send_keys(name)
         self.driver.find_element(By.NAME, "group_header").click()
-        self.driver.find_element(By.NAME, "group_header").send_keys("vvvvvvvvvvvvvvvvv")
+        self.driver.find_element(By.NAME, "group_header").send_keys(header)
         self.driver.find_element(By.NAME, "group_footer").click()
-        self.driver.find_element(By.NAME, "group_footer").send_keys("vvvvvvvvvvvvvvvvvvvv")
+        self.driver.find_element(By.NAME, "group_footer").send_keys(footer)
         # submit group creation
         self.driver.find_element(By.NAME, "submit").click()
 
     def init_group_page(self):
         self.driver.find_element(By.NAME, "new").click()
 
-    def login(self):
+    def login(self, username, password):
         self.driver.find_element(By.NAME, "user").click()
-        self.driver.find_element(By.NAME, "user").send_keys("admin")
+        self.driver.find_element(By.NAME, "user").send_keys(username)
         self.driver.find_element(By.NAME, "pass").click()
-        self.driver.find_element(By.NAME, "pass").send_keys("secret")
+        self.driver.find_element(By.NAME, "pass").send_keys(password)
         self.driver.find_element(By.CSS_SELECTOR, "input:nth-child(7)").click()
 
     def open_home_page(self):
