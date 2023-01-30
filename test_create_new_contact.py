@@ -18,47 +18,61 @@ class TestTestcreatenewcontact():
   def teardown_method(self, method):
     self.driver.quit()
   
-  def test_testcreatenewcontact(self):
+  def test_create_new_contact(self):
     self.open_home_page()
     self.driver.set_window_size(1550, 838)
-    self.login()
-    self.create_new_contact()
+    self.login(username="admin", password="secret")
+    self.create_new_contact(firstname="Андрей",middlename= "Сергеевич", lastname="Зенин", nickname="andreich_zenin", poletitle="test_title", company="test_company", address="Ryazan",
+                            telephonehome="84913324693", telephonemobile="89105984136", telephonework="89156327896", telephonefax="79102653789", email="sobaka@mail.ru", byear="1996", phone2="Ra",
+                            notes="Ryazan")
     self.logout()
+
+  def test2_create_new_contact(self):
+      self.open_home_page()
+      self.driver.set_window_size(1550, 838)
+      self.login(username="admin", password="secret")
+      self.create_new_contact(firstname="Антон", middlename="Сергеевич", lastname="Лопата", nickname="anton_lopata",
+                              poletitle="не понятное поле, заполним так", company="АЛЬФА БАНК", address="Ryazan",
+                              telephonehome="74113354693", telephonemobile="89505984146", telephonework="79156627896",
+                              telephonefax="29102353789", email="kot@mail.ru", byear="1995", phone2="Rakkkkkk",
+                              notes="Ryazan2")
+      self.logout()
 
   def logout(self):
     self.driver.find_element(By.LINK_TEXT, "Logout").click()
 
-  def create_new_contact(self):
+  def create_new_contact(self, firstname, middlename, lastname, nickname, poletitle, company, address, telephonehome,
+                         telephonemobile, telephonework, telephonefax, email, byear, phone2, notes):
     # create new contact and filling out the form
     self.driver.find_element(By.LINK_TEXT, "add new").click()
     self.driver.find_element(By.NAME, "firstname").click()
-    self.driver.find_element(By.NAME, "firstname").send_keys("Андрей")
+    self.driver.find_element(By.NAME, "firstname").send_keys(firstname)
     self.driver.find_element(By.NAME, "theform").click()
     self.driver.find_element(By.NAME, "middlename").click()
-    self.driver.find_element(By.NAME, "middlename").send_keys("Сергеевич")
+    self.driver.find_element(By.NAME, "middlename").send_keys(middlename)
     self.driver.find_element(By.NAME, "theform").click()
     self.driver.find_element(By.NAME, "lastname").click()
-    self.driver.find_element(By.NAME, "lastname").send_keys("Зенин")
+    self.driver.find_element(By.NAME, "lastname").send_keys(lastname)
     self.driver.find_element(By.NAME, "theform").click()
     self.driver.find_element(By.NAME, "nickname").click()
-    self.driver.find_element(By.NAME, "nickname").send_keys("andreich_zenin")
+    self.driver.find_element(By.NAME, "nickname").send_keys(nickname)
     self.driver.find_element(By.NAME, "theform").click()
     self.driver.find_element(By.NAME, "title").click()
-    self.driver.find_element(By.NAME, "title").send_keys("test_title")
+    self.driver.find_element(By.NAME, "title").send_keys(poletitle)
     self.driver.find_element(By.NAME, "company").click()
-    self.driver.find_element(By.NAME, "company").send_keys("test_company")
+    self.driver.find_element(By.NAME, "company").send_keys(company)
     self.driver.find_element(By.NAME, "address").click()
-    self.driver.find_element(By.NAME, "address").send_keys("Ryazan")
+    self.driver.find_element(By.NAME, "address").send_keys(address)
     self.driver.find_element(By.NAME, "home").click()
-    self.driver.find_element(By.NAME, "home").send_keys("84913324693")
+    self.driver.find_element(By.NAME, "home").send_keys(telephonehome)
     self.driver.find_element(By.NAME, "mobile").click()
-    self.driver.find_element(By.NAME, "mobile").send_keys("89105984136")
+    self.driver.find_element(By.NAME, "mobile").send_keys(telephonemobile)
     self.driver.find_element(By.NAME, "work").click()
-    self.driver.find_element(By.NAME, "work").send_keys("89156327896")
+    self.driver.find_element(By.NAME, "work").send_keys(telephonework)
     self.driver.find_element(By.NAME, "fax").click()
-    self.driver.find_element(By.NAME, "fax").send_keys("79102653789")
+    self.driver.find_element(By.NAME, "fax").send_keys(telephonefax)
     self.driver.find_element(By.NAME, "email").click()
-    self.driver.find_element(By.NAME, "email").send_keys("sobaka@mail.ru")
+    self.driver.find_element(By.NAME, "email").send_keys(email)
     self.driver.find_element(By.NAME, "bday").click()
     dropdown = self.driver.find_element(By.NAME, "bday")
     dropdown.find_element(By.XPATH, "//option[. = '12']").click()
@@ -68,21 +82,22 @@ class TestTestcreatenewcontact():
     dropdown.find_element(By.XPATH, "//option[. = 'February']").click()
     self.driver.find_element(By.CSS_SELECTOR, "select:nth-child(62) > option:nth-child(3)").click()
     self.driver.find_element(By.NAME, "byear").click()
-    self.driver.find_element(By.NAME, "byear").send_keys("1996")
+    self.driver.find_element(By.NAME, "byear").send_keys(byear)
     self.driver.find_element(By.NAME, "theform").click()
     self.driver.find_element(By.NAME, "address2").click()
-    self.driver.find_element(By.NAME, "address2").send_keys("address_test")
+    self.test = "address_test"
+    self.driver.find_element(By.NAME, "address2").send_keys(self.test)
     self.driver.find_element(By.NAME, "phone2").click()
-    self.driver.find_element(By.NAME, "phone2").send_keys("Ra")
+    self.driver.find_element(By.NAME, "phone2").send_keys(phone2)
     self.driver.find_element(By.NAME, "notes").click()
-    self.driver.find_element(By.NAME, "notes").send_keys("Ryazan")
+    self.driver.find_element(By.NAME, "notes").send_keys(notes)
     self.driver.find_element(By.CSS_SELECTOR, "input:nth-child(87)").click()
 
-  def login(self):
+  def login(self, username, password):
     self.driver.find_element(By.NAME, "user").click()
-    self.driver.find_element(By.NAME, "user").send_keys("admin")
+    self.driver.find_element(By.NAME, "user").send_keys(username)
     self.driver.find_element(By.NAME, "pass").click()
-    self.driver.find_element(By.NAME, "pass").send_keys("secret")
+    self.driver.find_element(By.NAME, "pass").send_keys(password)
     self.driver.find_element(By.CSS_SELECTOR, "input:nth-child(7)").click()
 
   def open_home_page(self):
