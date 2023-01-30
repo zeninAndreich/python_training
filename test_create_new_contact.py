@@ -19,13 +19,17 @@ class TestTestcreatenewcontact():
     self.driver.quit()
   
   def test_testcreatenewcontact(self):
-    self.driver.get("http://localhost/addressbook/")
+    self.open_home_page()
     self.driver.set_window_size(1550, 838)
-    self.driver.find_element(By.NAME, "user").click()
-    self.driver.find_element(By.NAME, "user").send_keys("admin")
-    self.driver.find_element(By.NAME, "pass").click()
-    self.driver.find_element(By.NAME, "pass").send_keys("secret")
-    self.driver.find_element(By.CSS_SELECTOR, "input:nth-child(7)").click()
+    self.login()
+    self.create_new_contact()
+    self.logout()
+
+  def logout(self):
+    self.driver.find_element(By.LINK_TEXT, "Logout").click()
+
+  def create_new_contact(self):
+    # create new contact and filling out the form
     self.driver.find_element(By.LINK_TEXT, "add new").click()
     self.driver.find_element(By.NAME, "firstname").click()
     self.driver.find_element(By.NAME, "firstname").send_keys("Андрей")
@@ -73,5 +77,14 @@ class TestTestcreatenewcontact():
     self.driver.find_element(By.NAME, "notes").click()
     self.driver.find_element(By.NAME, "notes").send_keys("Ryazan")
     self.driver.find_element(By.CSS_SELECTOR, "input:nth-child(87)").click()
-    self.driver.find_element(By.LINK_TEXT, "Logout").click()
+
+  def login(self):
+    self.driver.find_element(By.NAME, "user").click()
+    self.driver.find_element(By.NAME, "user").send_keys("admin")
+    self.driver.find_element(By.NAME, "pass").click()
+    self.driver.find_element(By.NAME, "pass").send_keys("secret")
+    self.driver.find_element(By.CSS_SELECTOR, "input:nth-child(7)").click()
+
+  def open_home_page(self):
+    self.driver.get("http://localhost/addressbook/")
   
