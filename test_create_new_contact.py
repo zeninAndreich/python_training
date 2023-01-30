@@ -9,6 +9,7 @@ from selenium.webdriver.support import expected_conditions
 from selenium.webdriver.support.wait import WebDriverWait
 from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.common.desired_capabilities import DesiredCapabilities
+from contact import Contact
 
 class TestTestcreatenewcontact():
   def setup_method(self, method):
@@ -22,57 +23,56 @@ class TestTestcreatenewcontact():
     self.open_home_page()
     self.driver.set_window_size(1550, 838)
     self.login(username="admin", password="secret")
-    self.create_new_contact(firstname="Андрей",middlename= "Сергеевич", lastname="Зенин", nickname="andreich_zenin", poletitle="test_title", company="test_company", address="Ryazan",
+    self.create_new_contact(Contact(firstname="Андрей",middlename= "Сергеевич", lastname="Зенин", nickname="andreich_zenin", poletitle="test_title", company="test_company", address="Ryazan",
                             telephonehome="84913324693", telephonemobile="89105984136", telephonework="89156327896", telephonefax="79102653789", email="sobaka@mail.ru", byear="1996", phone2="Ra",
-                            notes="Ryazan")
+                            notes="Ryazan"))
     self.logout()
 
   def test2_create_new_contact(self):
       self.open_home_page()
       self.driver.set_window_size(1550, 838)
       self.login(username="admin", password="secret")
-      self.create_new_contact(firstname="Антон", middlename="Сергеевич", lastname="Лопата", nickname="anton_lopata",
+      self.create_new_contact(Contact(firstname="Антон", middlename="Сергеевич", lastname="Лопата", nickname="anton_lopata",
                               poletitle="не понятное поле, заполним так", company="АЛЬФА БАНК", address="Ryazan",
                               telephonehome="74113354693", telephonemobile="89505984146", telephonework="79156627896",
                               telephonefax="29102353789", email="kot@mail.ru", byear="1995", phone2="Rakkkkkk",
-                              notes="Ryazan2")
+                              notes="Ryazan2"))
       self.logout()
 
   def logout(self):
     self.driver.find_element(By.LINK_TEXT, "Logout").click()
 
-  def create_new_contact(self, firstname, middlename, lastname, nickname, poletitle, company, address, telephonehome,
-                         telephonemobile, telephonework, telephonefax, email, byear, phone2, notes):
+  def create_new_contact(self, contact):
     # create new contact and filling out the form
     self.driver.find_element(By.LINK_TEXT, "add new").click()
     self.driver.find_element(By.NAME, "firstname").click()
-    self.driver.find_element(By.NAME, "firstname").send_keys(firstname)
+    self.driver.find_element(By.NAME, "firstname").send_keys(contact.firstname)
     self.driver.find_element(By.NAME, "theform").click()
     self.driver.find_element(By.NAME, "middlename").click()
-    self.driver.find_element(By.NAME, "middlename").send_keys(middlename)
+    self.driver.find_element(By.NAME, "middlename").send_keys(contact.middlename)
     self.driver.find_element(By.NAME, "theform").click()
     self.driver.find_element(By.NAME, "lastname").click()
-    self.driver.find_element(By.NAME, "lastname").send_keys(lastname)
+    self.driver.find_element(By.NAME, "lastname").send_keys(contact.lastname)
     self.driver.find_element(By.NAME, "theform").click()
     self.driver.find_element(By.NAME, "nickname").click()
-    self.driver.find_element(By.NAME, "nickname").send_keys(nickname)
+    self.driver.find_element(By.NAME, "nickname").send_keys(contact.nickname)
     self.driver.find_element(By.NAME, "theform").click()
     self.driver.find_element(By.NAME, "title").click()
-    self.driver.find_element(By.NAME, "title").send_keys(poletitle)
+    self.driver.find_element(By.NAME, "title").send_keys(contact.poletitle)
     self.driver.find_element(By.NAME, "company").click()
-    self.driver.find_element(By.NAME, "company").send_keys(company)
+    self.driver.find_element(By.NAME, "company").send_keys(contact.company)
     self.driver.find_element(By.NAME, "address").click()
-    self.driver.find_element(By.NAME, "address").send_keys(address)
+    self.driver.find_element(By.NAME, "address").send_keys(contact.address)
     self.driver.find_element(By.NAME, "home").click()
-    self.driver.find_element(By.NAME, "home").send_keys(telephonehome)
+    self.driver.find_element(By.NAME, "home").send_keys(contact.telephonehome)
     self.driver.find_element(By.NAME, "mobile").click()
-    self.driver.find_element(By.NAME, "mobile").send_keys(telephonemobile)
+    self.driver.find_element(By.NAME, "mobile").send_keys(contact.telephonemobile)
     self.driver.find_element(By.NAME, "work").click()
-    self.driver.find_element(By.NAME, "work").send_keys(telephonework)
+    self.driver.find_element(By.NAME, "work").send_keys(contact.telephonework)
     self.driver.find_element(By.NAME, "fax").click()
-    self.driver.find_element(By.NAME, "fax").send_keys(telephonefax)
+    self.driver.find_element(By.NAME, "fax").send_keys(contact.telephonefax)
     self.driver.find_element(By.NAME, "email").click()
-    self.driver.find_element(By.NAME, "email").send_keys(email)
+    self.driver.find_element(By.NAME, "email").send_keys(contact.email)
     self.driver.find_element(By.NAME, "bday").click()
     dropdown = self.driver.find_element(By.NAME, "bday")
     dropdown.find_element(By.XPATH, "//option[. = '12']").click()
@@ -82,15 +82,15 @@ class TestTestcreatenewcontact():
     dropdown.find_element(By.XPATH, "//option[. = 'February']").click()
     self.driver.find_element(By.CSS_SELECTOR, "select:nth-child(62) > option:nth-child(3)").click()
     self.driver.find_element(By.NAME, "byear").click()
-    self.driver.find_element(By.NAME, "byear").send_keys(byear)
+    self.driver.find_element(By.NAME, "byear").send_keys(contact.byear)
     self.driver.find_element(By.NAME, "theform").click()
     self.driver.find_element(By.NAME, "address2").click()
     self.test = "address_test"
     self.driver.find_element(By.NAME, "address2").send_keys(self.test)
     self.driver.find_element(By.NAME, "phone2").click()
-    self.driver.find_element(By.NAME, "phone2").send_keys(phone2)
+    self.driver.find_element(By.NAME, "phone2").send_keys(contact.phone2)
     self.driver.find_element(By.NAME, "notes").click()
-    self.driver.find_element(By.NAME, "notes").send_keys(notes)
+    self.driver.find_element(By.NAME, "notes").send_keys(contact.notes)
     self.driver.find_element(By.CSS_SELECTOR, "input:nth-child(87)").click()
 
   def login(self, username, password):
