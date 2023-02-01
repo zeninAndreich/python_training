@@ -20,8 +20,6 @@ class TestTestcreatenewcontact():
     self.driver.quit()
   
   def test_create_new_contact(self):
-    self.open_home_page()
-    self.driver.set_window_size(1550, 838)
     self.login(username="admin", password="secret")
     self.create_new_contact(Contact(firstname="Андрей",middlename= "Сергеевич", lastname="Зенин", nickname="andreich_zenin", poletitle="test_title", company="test_company", address="Ryazan",
                             telephonehome="84913324693", telephonemobile="89105984136", telephonework="89156327896", telephonefax="79102653789", email="sobaka@mail.ru", byear="1996", phone2="Ra",
@@ -29,8 +27,6 @@ class TestTestcreatenewcontact():
     self.logout()
 
   def test2_create_new_contact(self):
-      self.open_home_page()
-      self.driver.set_window_size(1550, 838)
       self.login(username="admin", password="secret")
       self.create_new_contact(Contact(firstname="Антон", middlename="Сергеевич", lastname="Лопата", nickname="anton_lopata",
                               poletitle="не понятное поле, заполним так", company="АЛЬФА БАНК", address="Ryazan",
@@ -94,6 +90,7 @@ class TestTestcreatenewcontact():
     self.driver.find_element(By.CSS_SELECTOR, "input:nth-child(87)").click()
 
   def login(self, username, password):
+    self.open_home_page()
     self.driver.find_element(By.NAME, "user").click()
     self.driver.find_element(By.NAME, "user").send_keys(username)
     self.driver.find_element(By.NAME, "pass").click()
