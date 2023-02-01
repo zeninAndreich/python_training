@@ -14,21 +14,13 @@ class TestTest445588():
         self.driver.quit()
 
     def test_add_groups_new(self):
-        self.open_home_page()
-        self.driver.set_window_size(1550, 838)
         self.login(username="admin", password="secret")
-        self.init_group_page()
         self.create_group(Group(name="Тест по уроку 14 - вынос переменных в класс", header = "test_one", footer="test_two"))
-        self.return_to_group_page()
         self.logout()
 
     def test_add_groups_new_pustaya(self):
-        self.open_home_page()
-        self.driver.set_window_size(1550, 838)
         self.login(username="admin", password="secret")
-        self.init_group_page()
         self.create_group(Group(name="", header="", footer=""))
-        self.return_to_group_page()
         self.logout()
 
     def logout(self):
@@ -38,6 +30,7 @@ class TestTest445588():
         self.driver.find_element(By.LINK_TEXT, "group page").click()
 
     def create_group(self, group):
+        self.init_group_page()
         # fill group form
         self.driver.find_element(By.NAME, "group_name").click()
         self.driver.find_element(By.NAME, "group_name").send_keys(group.name)
@@ -47,11 +40,13 @@ class TestTest445588():
         self.driver.find_element(By.NAME, "group_footer").send_keys(group.footer)
         # submit group creation
         self.driver.find_element(By.NAME, "submit").click()
+        self.return_to_group_page()
 
     def init_group_page(self):
         self.driver.find_element(By.NAME, "new").click()
 
     def login(self, username, password):
+        self.open_home_page()
         self.driver.find_element(By.NAME, "user").click()
         self.driver.find_element(By.NAME, "user").send_keys(username)
         self.driver.find_element(By.NAME, "pass").click()
