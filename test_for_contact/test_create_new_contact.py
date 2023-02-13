@@ -15,7 +15,7 @@ def app(request):
 
 def test_create_new_contact(app):
     app.session_for_contact.login(username="admin", password="secret")
-    app.create_new_contact(
+    app.contact.create_new_contact(
         Contact(firstname="Андрей", middlename="Сергеевич", lastname="Зенин", nickname="andreich_zenin",
                 poletitle="test_title", company="test_company", address="Ryazan",
                 telephonehome="84913324693", telephonemobile="89105984136", telephonework="89156327896",
@@ -26,7 +26,7 @@ def test_create_new_contact(app):
 
 def test2_create_new_contact(app):
     app.session_for_contact.login(username="admin", password="secret")
-    app.create_new_contact(
+    app.contact.create_new_contact(
         Contact(firstname="Антон", middlename="Сергеевич", lastname="Лопата", nickname="anton_lopata",
                 poletitle="не понятное поле, заполним так", company="АЛЬФА БАНК", address="Ryazan",
                 telephonehome="74113354693", telephonemobile="89505984146", telephonework="79156627896",
