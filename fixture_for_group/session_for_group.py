@@ -1,6 +1,5 @@
 from selenium.webdriver.common.by import By
 
-
 class SessionHelper_group:
 
     def __init__(self, app):
