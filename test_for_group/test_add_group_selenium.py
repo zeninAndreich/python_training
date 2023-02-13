@@ -13,12 +13,12 @@ def app(request):
     return fixture
 
 def test_add_groups_new(app):
-    app.login(username="admin", password="secret")
+    app.session_for_group.login(username="admin", password="secret")
     app.create_group(Group(name="Тест по уроку 14 - вынос переменных в класс", header = "test_one", footer="test_two"))
-    app.logout()
+    app.session_for_group.logout()
 
 def test_add_groups_new_pustaya(app):
-    app.login(username="admin", password="secret")
+    app.session_for_group.login(username="admin", password="secret")
     app.create_group(Group(name="", header="", footer=""))
-    app.logout()
+    app.session_for_group.logout()
 
