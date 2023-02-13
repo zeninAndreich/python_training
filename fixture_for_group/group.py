@@ -24,3 +24,11 @@ class GroupHelper:
 
     def init_group_page(self):
         self.app.driver.find_element(By.NAME, "new").click()
+
+    def delete_first_group(self):
+        self.app.driver.get("http://localhost/addressbook/group.php")
+        # выбрать первую группу
+        self.app.driver.find_element(By.NAME, "selected[]").click()
+        # удалить выбранную группу
+        self.app.driver.find_element(By.NAME, "delete").click()
+        self.return_to_group_page()
