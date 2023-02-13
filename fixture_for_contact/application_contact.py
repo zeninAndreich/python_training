@@ -1,5 +1,9 @@
 from selenium import webdriver
 from selenium.webdriver.common.by import By
+
+from fixture_for_contact.session_for_contact import SessionHelper_contact
+
+
 # Отдельный класс,в котором содержатся все вспомогательные методы.
 
 class Application_contact:
@@ -7,9 +11,8 @@ class Application_contact:
     def __init__(self):
         self.driver = webdriver.Firefox()
         self.vars = {}
+        self.session_for_contact = SessionHelper_contact(self)
 
-    def logout(self):
-        self.driver.find_element(By.LINK_TEXT, "Logout").click()
 
     def create_new_contact(self, contact):
         # create new contact and filling out the form
@@ -62,13 +65,6 @@ class Application_contact:
         self.driver.find_element(By.NAME, "notes").send_keys(contact.notes)
         self.driver.find_element(By.CSS_SELECTOR, "input:nth-child(87)").click()
 
-    def login(self, username, password):
-        self.open_home_page()
-        self.driver.find_element(By.NAME, "user").click()
-        self.driver.find_element(By.NAME, "user").send_keys(username)
-        self.driver.find_element(By.NAME, "pass").click()
-        self.driver.find_element(By.NAME, "pass").send_keys(password)
-        self.driver.find_element(By.CSS_SELECTOR, "input:nth-child(7)").click()
 
     def open_home_page(self):
         self.driver.get("http://localhost/addressbook/")

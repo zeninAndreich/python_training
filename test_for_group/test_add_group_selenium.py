@@ -4,6 +4,7 @@ from model_for_group.group import Group
 from fixture_for_group.application import Application
 import pytest
 
+
 @pytest.fixture
 def app(request):
     # Создание фикстуры
@@ -12,13 +13,14 @@ def app(request):
     request.addfinalizer(fixture.destroy)
     return fixture
 
+
 def test_add_groups_new(app):
     app.session_for_group.login(username="admin", password="secret")
-    app.create_group(Group(name="Тест по уроку 14 - вынос переменных в класс", header = "test_one", footer="test_two"))
+    app.create_group(Group(name="Тест по уроку 14 - вынос переменных в класс", header="test_one", footer="test_two"))
     app.session_for_group.logout()
+
 
 def test_add_groups_new_pustaya(app):
     app.session_for_group.login(username="admin", password="secret")
     app.create_group(Group(name="", header="", footer=""))
     app.session_for_group.logout()
-
