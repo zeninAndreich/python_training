@@ -1,4 +1,5 @@
 from selenium.webdriver.common.by import By
+from time import sleep
 
 
 class ContactHelper:
@@ -56,3 +57,15 @@ class ContactHelper:
         self.app.driver.find_element(By.NAME, "notes").click()
         self.app.driver.find_element(By.NAME, "notes").send_keys(contact.notes)
         self.app.driver.find_element(By.CSS_SELECTOR, "input:nth-child(87)").click()
+
+
+#для корректной работы теста на удаление, делал выборку элемента "удалить" через CSS_SELECTOR
+    def deleted_first_contact(self):
+        self.app.driver.get("http://localhost/addressbook/")
+        # выбрать первый контакт.
+        self.app.driver.find_element(By.NAME, "selected[]").click()
+        # удалить выбранный элемент.
+        self.app.driver.find_element(By.CSS_SELECTOR, "[value='Delete']").click()
+        assert self.app.driver.switch_to.alert.text == "Delete 1 addresses?"
+        self.app.driver.switch_to.alert.accept()
+        sleep(0.05)

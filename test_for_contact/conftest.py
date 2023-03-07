@@ -8,11 +8,10 @@ from fixture_for_contact.application_contact import Application_contact
 # Для того,чтобы фикстура создавалась одна на всю сессию, а не для каждого теста отдельно.
 
 
-@pytest.fixture(scope="session")
+@pytest.fixture
 def app(request):
     # Создание фикстуры
-    fixture = Application()
-    # Указание на то,как фикстура должна быть разрушена
-    request.addfinalizer(fixture.destroy)
+    fixture = Application_contact()
+    # Разрушение фикстуры
+    request.addfinalizer(fixture.destroy_contact)
     return fixture
-
