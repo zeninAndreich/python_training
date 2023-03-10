@@ -11,24 +11,41 @@ class GroupHelper:
 
     def create(self, group):
         self.init_group_page()
-        # fill group form
-        self.app.driver.find_element(By.NAME, "group_name").click()
-        self.app.driver.find_element(By.NAME, "group_name").send_keys(group.name)
-        self.app.driver.find_element(By.NAME, "group_header").click()
-        self.app.driver.find_element(By.NAME, "group_header").send_keys(group.header)
-        self.app.driver.find_element(By.NAME, "group_footer").click()
-        self.app.driver.find_element(By.NAME, "group_footer").send_keys(group.footer)
+        self.fill_group_form(group)
         # submit group creation
         self.app.driver.find_element(By.NAME, "submit").click()
         self.return_to_group_page()
+
+    def fill_group_form(self, group):
+        self.type("group_name", group.name)
+        self.type("group_header", group.header)
+        self.type("group_footer", group.footer)
+
+    def type(self, field_name, text):
+        if text is not None:
+            self.app.driver.find_element(By.NAME, field_name).click()
+            self.app.driver.find_element(By.NAME, field_name).send_keys(text)
 
     def init_group_page(self):
         self.app.driver.find_element(By.NAME, "new").click()
 
     def delete_first_group(self):
         self.app.driver.get("http://localhost/addressbook/group.php")
-        # выбрать первую группу
-        self.app.driver.find_element(By.NAME, "selected[]").click()
+        self.select_ferst_group()
         # удалить выбранную группу
         self.app.driver.find_element(By.NAME, "delete").click()
+        self.return_to_group_page()
+
+    def select_ferst_group(self):
+        self.app.driver.find_element(By.NAME, "selected[]").click()
+
+    def modify_first_group(self, new_group_data):
+        self.app.driver.get("http://localhost/addressbook/group.php")
+        self.select_ferst_group()
+        # Нажимаем на кнопку для открытия модификации
+        self.app.driver.find_element(By.NAME, "edit").click()
+        # Заполнить форму.
+        self.fill_group_form(new_group_data)
+        # Подтвердить
+        self.app.driver.find_element(By.NAME, "update").click()
         self.return_to_group_page()
