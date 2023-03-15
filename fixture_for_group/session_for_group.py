@@ -1,5 +1,7 @@
 from selenium.webdriver.common.by import By
 from time import sleep
+
+
 class SessionHelper_group:
 
     def __init__(self, app):
@@ -16,4 +18,3 @@ class SessionHelper_group:
     def logout(self):
         self.app.driver.find_element(By.LINK_TEXT, "Logout").click()
         sleep(0.05)
-

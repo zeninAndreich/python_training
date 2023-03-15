@@ -5,13 +5,8 @@ from model_for_group.group import Group
 
 
 def test_add_groups_new(app):
-    app.session_for_group.login(username="admin", password="secret")
     app.group.create(Group(name="Тест по уроку 14 - вынос переменных в класс", header="test_one", footer="test_two"))
-    app.session_for_group.logout()
-
 
 
 def test_add_groups_new_pustaya(app):
-    app.session_for_group.login(username="admin", password="secret")
     app.group.create(Group(name="", header="", footer=""))
-    app.session_for_group.logout()
