@@ -1,6 +1,6 @@
 # Общая фикстура для тестов. Перенес ее в верхний уровень, потому что в подкаталоге может не находить.
-from fixture_for_group.application import Application
 import pytest
+from fixture_for_group.application import Application
 
 # Для того,чтобы фикстура создавалась одна на всю сессию, а не для каждого теста отдельно.
 
@@ -24,7 +24,7 @@ def app(request):
 @pytest.fixture(scope="session", autouse=True)
 def stop(request):
     def fin():
-        fixture.session_for_group.logout()
+        fixture.session_for_group.ensure_logout()
         fixture.destroy()
     # Указание на то,как фикстура должна быть разрушена
     request.addfinalizer(fin)
