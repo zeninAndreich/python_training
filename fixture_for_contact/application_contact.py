@@ -21,7 +21,6 @@ class Application_contact:
     def destroy_contact(self):
         self.driver.quit()
 
-
     def is_valid(self):
         try:
             self.driver.current_url

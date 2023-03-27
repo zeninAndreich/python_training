@@ -9,7 +9,7 @@ class Application:
 
     def __init__(self):
         self.driver = webdriver.Firefox()
-        # self.driver.implicitly_wait(30)
+        self.driver.implicitly_wait(30)
         self.vars = {}
         self.session_for_group = SessionHelper_group(self)
         self.group = GroupHelper(self)

@@ -3,7 +3,6 @@
 from model_for_contact.contact import Contact
 
 
-
 def test_create_new_contact(app):
     app.contact.create_new_contact(
         Contact(firstname="Андрей", middlename="Сергеевич", lastname="Зенин", nickname="andreich_zenin",
