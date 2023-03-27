@@ -16,18 +16,18 @@ def app(request):
     if fixture is None:
         # Создание фикстуры
         fixture = Application_contact()
-        fixture.session_for_contact.login(username="admin", password="secret")
+
     else:
         if not fixture.is_valid():
             fixture = Application_contact()
-            fixture.session_for_contact.login(username="admin", password="secret")
+    fixture.session_for_contact.ensure_login(username="admin", password="secret")
     return fixture
 
 
 @pytest.fixture(scope="session", autouse=True)
 def stop(request):
     def fin():
-        fixture.session_for_contact.logout()
+        fixture.session_for_contact.ensure_logout()
         fixture.destroy_contact()
     # Разрушение фикстуры
     request.addfinalizer(fin)
