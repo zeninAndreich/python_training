@@ -49,3 +49,8 @@ class GroupHelper:
         # Подтвердить
         self.app.driver.find_element(By.NAME, "update").click()
         self.return_to_group_page()
+
+
+    def count(self):
+        self.app.driver.get("http://localhost/addressbook/group.php")
+        return len(self.app.driver.find_elements(By.NAME, "selected[]"))
