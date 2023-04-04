@@ -18,11 +18,11 @@ class ContactHelper:
         self.type_contact("middlename", contact.middlename)
         self.type_contact("lastname", contact.lastname)
         self.type_contact("nickname", contact.nickname)
-        #self.type_contact("title", contact.title)
-        #self.type_contact("company", contact.company)
-        #self.type_contact("address", contact.address)
-        #self.type_contact("home", contact.home)
-        #self.type_contact("mobile", contact.mobile)
+        # self.type_contact("title", contact.title)
+        # self.type_contact("company", contact.company)
+        # self.type_contact("address", contact.address)
+        # self.type_contact("home", contact.home)
+        # self.type_contact("mobile", contact.mobile)
         # self.type_contact("work", contact.work)
         # self.type_contact("fax", contact.fax)
         # self.type_contact("email", contact.email)
@@ -33,14 +33,12 @@ class ContactHelper:
         # self.type_contact("phone2", contact.phone2)
         # self.type_contact("notes", contact.notes)
 
-
-
-    def type_contact(self,field_firstname, text):
+    def type_contact(self, field_firstname, text):
         if text is not None:
             self.app.driver.find_element(By.NAME, field_firstname).click()
             self.app.driver.find_element(By.NAME, field_firstname).send_keys(text)
 
-    #для корректной работы теста на удаление, делал выборку элемента "удалить" через CSS_SELECTOR
+    # для корректной работы теста на удаление, делал выборку элемента "удалить" через CSS_SELECTOR
     def deleted_first_contact(self):
         self.app.driver.get("http://localhost/addressbook/")
         self.select_first_contact()
@@ -63,4 +61,6 @@ class ContactHelper:
         # Подтвердить
         self.app.driver.find_element(By.CSS_SELECTOR, "input:nth-child(86)").click()
 
-
+    def count_contact(self):
+        self.app.driver.get("http://localhost/addressbook/")
+        return len(self.app.driver.find_elements(By.NAME, "selected[]"))
