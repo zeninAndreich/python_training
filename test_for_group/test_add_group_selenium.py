@@ -5,8 +5,13 @@ from model_for_group.group import Group
 
 
 def test_add_groups_new(app):
+    old_groups = app.group.get_group_list()
     app.group.create(Group(name="Тест по уроку 14 - вынос переменных в класс", header="test_one", footer="test_two"))
-
+    new_groups = app.group.get_group_list()
+    assert len(old_groups) + 1 == len(new_groups)
 
 def test_add_groups_new_pustaya(app):
+    old_groups = app.group.get_group_list()
     app.group.create(Group(name="", header="", footer=""))
+    new_groups = app.group.get_group_list()
+    assert len(old_groups) + 1 == len(new_groups)
