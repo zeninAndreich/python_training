@@ -4,12 +4,15 @@ from model_for_contact.contact import Contact
 
 
 def test_create_new_contact(app):
+    #old_contacts = app.contact.get_contact_list()
     app.contact.create_new_contact(
         Contact(firstname="Андрей", middlename="Сергеевич", lastname="Зенин", nickname="andreich_zenin",
                 poletitle="test_title", company="test_company", address="Ryazan",
                 telephonehome="84913324693", telephonemobile="89105984136", telephonework="89156327896",
                 telephonefax="79102653789", email="sobaka@mail.ru", byear="1996", phone2="Ra",
                 notes="Ryazan"))
+    #new_contacts = app.contact.get_contact_list()
+    #assert len(old_contacts) + 1 == len(new_contacts)
 
 
 def test2_create_new_contact(app):

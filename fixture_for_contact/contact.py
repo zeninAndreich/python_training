@@ -1,5 +1,6 @@
 from selenium.webdriver.common.by import By
 from time import sleep
+from model_for_contact.contact import Contact
 
 
 class ContactHelper:
@@ -64,3 +65,14 @@ class ContactHelper:
     def count_contact(self):
         self.app.driver.get("http://localhost/addressbook/")
         return len(self.app.driver.find_elements(By.NAME, "selected[]"))
+
+    #def get_contact_list(self):
+        #self.app.driver.get("http://localhost/addressbook/")
+        #contacts = []
+        #for element in self.app.driver.find_elements(By.CSS_SELECTOR, "tr.name='entry'"):
+            #text = element.text
+            #id = element.find_element(By.NAME, "selected[]").get_attribute("value")
+            #contacts.append(Contact(firstname=text, lastname=text, middlename=text, id=id))
+        #return contacts
+
+
