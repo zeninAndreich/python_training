@@ -32,8 +32,11 @@ class GroupHelper:
         self.app.driver.find_element(By.NAME, "new").click()
 
     def delete_first_group(self):
+        self.delete_group_by_index(0)
+
+    def delete_group_by_index(self, index):
         self.app.driver.get("http://localhost/addressbook/group.php")
-        self.select_ferst_group()
+        self.select_group_by_index(index)
         # удалить выбранную группу
         self.app.driver.find_element(By.NAME, "delete").click()
         self.return_to_group_page()
@@ -42,9 +45,18 @@ class GroupHelper:
     def select_ferst_group(self):
         self.app.driver.find_element(By.NAME, "selected[]").click()
 
-    def modify_first_group(self, new_group_data):
+    def select_group_by_index(self, index):
+        self.app.driver.find_elements(By.NAME, "selected[]")[index].click()
+
+
+
+    def modify_first_group(self):
+        self.modify_group_by_index(0)
+
+
+    def modify_group_by_index(self, index, new_group_data):
         self.app.driver.get("http://localhost/addressbook/group.php")
-        self.select_ferst_group()
+        self.select_group_by_index(index)
         # Нажимаем на кнопку для открытия модификации
         self.app.driver.find_element(By.NAME, "edit").click()
         # Заполнить форму.
@@ -72,3 +84,4 @@ class GroupHelper:
                 self.group_cache.append(Group(name=text, id= id))
 
         return list(self.group_cache)
+
